@@ -18,7 +18,6 @@
     <mvc:resources mapping="/css/" location="/static/css/**"/>
     <mvc:resources mapping="/images/" location="/static/image/**"/>
     <mvc:resources mapping="/js/" location="/static/js/**"/>
-
     <mvc:annotation-driven/>
 
 </beans>
