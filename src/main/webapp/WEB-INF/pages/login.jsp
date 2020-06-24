@@ -18,23 +18,25 @@
 
 </head>
 <body class="container">
-<div class="jumbotron">
-    <form class="form-horizontal" role="form">
+
+    <form class="form-horizontal" role="form" method="post" action="./userLogin" style="width:60%;align-content: end">
         <div class="form-group">
-            <label class="sr-only" for="name">名称</label>
-            <input type="text" class="form-control" id="name" placeholder="请输入名称">
+            <label class="sr-only" for="id">ID或电话号码</label>
+            <input type="text" class="form-control" id="id" placeholder="请输入ID或电话号码">
         </div>
         <div class="form-group">
-            <label class="sr-only" for="inputfile">文件输入</label>
-            <input type="file" id="inputfile">
+            <label class="sr-only" for="password">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="请输入密码">
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox">请打勾
-            </label>
+        <div class="menu-item-radio">
+            <label for="doctorRadio">医生</label>
+            <input name="role" type="radio" value="0" id="doctorRadio">
+            <label for="patientRadio">病人</label><input name="role" type="radio" value="1" id="patientRadio">
+            <label for="adminRadio">管理员</label><input name="role" type="radio" value="2" id="adminRadio">
+            <label for="otherRadio">其他人</label><input name="role" type="radio" value="3" id="otherRadio">
         </div>
+
         <button type="submit" class="btn btn-default">提交</button>
     </form>
-</div>
 </body>
 </html>

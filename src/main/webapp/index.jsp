@@ -19,7 +19,7 @@
 <div class="jumbotron">
     <h1>欢迎使用XX医院系统</h1>
     <p>选择想要的功能</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">关于</a></p>
+    <p><a class="btn btn-primary btn-lg" href="./about" role="button">关于</a></p>
 </div>
 <p>
     <a type="button" class=" btn btn-info btn-lg" href="./doctor" >医生通道</a>
