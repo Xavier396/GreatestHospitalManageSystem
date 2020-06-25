@@ -1,6 +1,7 @@
 package com.yanghaijia.dao;
 
 import com.yanghaijia.domain.Password;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,10 @@ import java.util.List;
  */
 @Repository
 public interface PasswordDao {
+
     @Select("select * from Password")
     public List<Password> fetchAll();
+
+    @Select("select * from Password where user_id=#{id} or user_phone=#{id}")
+    public Password fetchOne(@Param("id") String s);
 }

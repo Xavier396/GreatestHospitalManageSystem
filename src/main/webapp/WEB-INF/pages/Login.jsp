@@ -30,9 +30,9 @@
         </div>
         <div class="menu-item-radio">
             <label for="doctorRadio">医生</label>
-            <input name="role" type="radio" value=0 id="doctorRadio">
-            <label for="patientRadio">病人</label><input name="role" type="radio" value=1 id="patientRadio">
-            <label for="adminRadio">管理员</label><input name="role" type="radio" value=2 id="adminRadio">
+            <input name="role" type="radio" value="0"id="doctorRadio">
+            <label for="patientRadio">病人</label><input name="role" type="radio" value="1" id="patientRadio">
+            <label for="adminRadio">管理员</label><input name="role" type="radio" value="2" id="adminRadio">
         </div>
         <div class="checkbox">
             <label>

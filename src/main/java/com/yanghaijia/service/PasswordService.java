@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface PasswordService {
     public List<Password> fetchAll();
+
+    public Password fetchOne(String s);
 }

@@ -5,7 +5,8 @@ package com.yanghaijia.domain;
  */
 public class Password {
     private Integer id;
-    private  String userId;
+    private String userId;
+    private String userPhone;
     private String passwordHash;
 
     public Integer getId() {
@@ -22,6 +23,14 @@ public class Password {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public String getPasswordHash() {

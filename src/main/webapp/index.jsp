@@ -22,11 +22,9 @@
     <p><a class="btn btn-primary btn-lg" href="./about" role="button">关于</a></p>
 </div>
 <p>
-    <a type="button" class=" btn btn-info btn-lg" href="./home" >医生通道</a>
+    <a type="button" class=" btn btn-info btn-lg" href="./home" >登录系统</a>
 </p>
-<p>
-    <a type="button" class=" btn btn-info btn-lg" >患者通道</a>
-</p>
+
 
 </body>
 </html>

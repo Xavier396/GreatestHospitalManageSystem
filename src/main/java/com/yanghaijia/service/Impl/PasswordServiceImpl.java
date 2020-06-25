@@ -15,4 +15,9 @@ public class PasswordServiceImpl implements PasswordService {
     public List<Password> fetchAll() {
         return passwordDao.fetchAll();
     }
+
+    @Override
+    public Password fetchOne(String s) {
+        return passwordDao.fetchOne(s);
+    }
 }

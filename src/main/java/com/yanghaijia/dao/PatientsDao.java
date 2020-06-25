@@ -14,4 +14,6 @@ public interface PatientsDao {
 
     @Select("select * from Patients")
     public List<Patients> fetchAll();
+
+
 }

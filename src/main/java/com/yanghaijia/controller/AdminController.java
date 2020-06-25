@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/userLogin")
-public class UserLoginController {
+public class AdminController {
 
 }
