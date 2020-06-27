@@ -15,4 +15,29 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> fetchAll() {
         return staffDao.fetchAll();
     }
+
+    @Override
+    public Staff fetchOne(String condition) {
+        return staffDao.fetchOne(condition);
+    }
+
+    @Override
+    public Boolean isAdmin(String condition) {
+        return staffDao.isAdmin(condition);
+    }
+
+    @Override
+    public List<Staff> selectSome(int offset, int limit) {
+        return staffDao.selectSome(offset,limit);
+    }
+
+    @Override
+    public Integer countAll() {
+        return staffDao.countAll();
+    }
+
+    @Override
+    public List<Staff> fetchSome(String depart, String keywords) {
+        return staffDao.fetchSome(depart,keywords);
+    }
 }

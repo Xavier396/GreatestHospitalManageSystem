@@ -1,10 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-    <typeAliases>
-        <typeAlias alias="Password" type="com.yanghaijia.domain.Password"/>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-config.dtd">-->
+<!--<configuration>-->
+<!--    <typeAliases>-->
+<!--        <typeAlias type="com.yanghaijia.domain.Password" alias="Password"/>-->
+<!--    </typeAliases>-->
+<!--    <environments default="dev">-->
+<!--        <environment id="dev">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--               &lt;!&ndash; 事务管理类型：JDBC、MANAGED &ndash;&gt;-->
+<!--            <dataSource type="POOLED">    &lt;!&ndash; 数据源类型：POOLED、UNPOOLED、JNDI &ndash;&gt;-->
+<!--                <property name="driver" value="org.sqlite.JDBC" />-->
+<!--                <property name="url" value="jdbc:mysql://D:/IdeaProjects/GreatestHospitalManageSystem/database/hospital" />-->
+<!--                <property name="username" value="" />-->
+<!--                <property name="password" value="" />-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
 
-    </typeAliases>
+<!--    &lt;!&ndash; 加载映射文件 mapper &ndash;&gt;-->
+<!--    <mappers>-->
+<!--        &lt;!&ndash; 路径用 斜线（/） 分割，而不是用 点(.) &ndash;&gt;-->
+<!--        <mapper  resource="PasswordMapper.xml"/>-->
+<!--    </mappers>-->
+
 
 </configuration>

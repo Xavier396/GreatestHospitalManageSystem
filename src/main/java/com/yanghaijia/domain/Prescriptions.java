@@ -11,9 +11,9 @@ public class Prescriptions {
      * prescriptionDateTime：处方开具的时间日期
      * */
 private  Integer id;
-private String prescriptionId;
-private  String prescriptionContent;
-private String prescriptionDateTime;
+private String prescription_id;
+private  String prescription_content;
+private String prescription_datetime;
 
     public Integer getId() {
         return id;
@@ -24,26 +24,26 @@ private String prescriptionDateTime;
     }
 
     public String getPrescriptionId() {
-        return prescriptionId;
+        return prescription_id;
     }
 
     public void setPrescriptionId(String prescriptionId) {
-        this.prescriptionId = prescriptionId;
+        this.prescription_id = prescriptionId;
     }
 
     public String getPrescriptionContent() {
-        return prescriptionContent;
+        return prescription_content;
     }
 
     public void setPrescriptionContent(String prescriptionContent) {
-        this.prescriptionContent = prescriptionContent;
+        this.prescription_content = prescriptionContent;
     }
 
     public String getPrescriptionDateTime() {
-        return prescriptionDateTime;
+        return prescription_datetime;
     }
 
     public void setPrescriptionDateTime(String prescriptionDateTime) {
-        this.prescriptionDateTime = prescriptionDateTime;
+        this.prescription_datetime = prescriptionDateTime;
     }
 }

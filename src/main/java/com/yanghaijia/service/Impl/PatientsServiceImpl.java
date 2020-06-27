@@ -16,4 +16,9 @@ public class PatientsServiceImpl implements PatientsService {
     public List<Patients> fetchAll() {
         return patientsDao.fetchAll();
     }
+
+    @Override
+    public Patients fetchOne(String condition) {
+        return patientsDao.fetchOne(condition);
+    }
 }

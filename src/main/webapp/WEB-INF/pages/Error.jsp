@@ -15,5 +15,14 @@
 </head>
 <body>
 ${error}
+
 </body>
+<script>
+    $(function(){
+        setInterval(function(){goto();},5000);
+    });
+    function goto() {
+        $(window).attr("location","./home");
+    };
+</script>
 </html>

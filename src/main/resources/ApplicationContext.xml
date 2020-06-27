@@ -23,7 +23,7 @@
 <!--                <property name="jdbcUrl" value="jdbc:sqlite:./src/main/db/super.db"/>-->
         <!--上面这条Mac专用-->
         <!--自己的Windows用这条-->
-        <property name="jdbcUrl" value="jdbc:sqlite://D:/IdeaProjects/GreatestHospitalManageSystem/database/hospital"/>
+        <property name="jdbcUrl" value="jdbc:sqlite://D:\IdeaProjects\GreatestHospitalManageSystem\database\hospital"/>
         <!--TODO:请配置好数据库-->
         <property name="user" value=""/>
         <property name="password" value=""/>
@@ -33,7 +33,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
 
-        <property name="configLocation" value="classpath:Mybatis-config.xml"/>
+<!--        <property name="configLocation" value="classpath:Mybatis-config.xml"/>-->
     </bean>
 
     <!--配置接口所在的包-->
@@ -56,7 +56,7 @@
     </tx:advice>
     <!--配置AOP增强-->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.yanghaijia.service.impl.*ServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.yanghaijia.service.Impl.*ServiceImpl.*(..))"/>
     </aop:config>
 
 </beans>

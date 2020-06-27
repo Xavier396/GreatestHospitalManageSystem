@@ -5,13 +5,13 @@ package com.yanghaijia.domain;
  */
 public class Medicine {
     private Integer id;
-    private String medicineName;
-    private Integer medicineQuantity;
-    private String medicineSupplier;
-    private Boolean medicineLegitimacy;
-    private Boolean isMedicineForPregnant;
-    private String medicineInstructions;
-    private Double medicinePrice;
+    private String medicine_name;
+    private Integer medicine_quantity;
+    private String medicine_supplier;
+    private Boolean medicine_legitimacy;
+    private Boolean is_medicine_for_pregnant;
+    private String medicine_instructions;
+    private Double medicine_price;
 
     public Integer getId() {
         return id;
@@ -22,58 +22,58 @@ public class Medicine {
     }
 
     public String getMedicineName() {
-        return medicineName;
+        return medicine_name;
     }
 
     public void setMedicineName(String medicineName) {
-        this.medicineName = medicineName;
+        this.medicine_name = medicineName;
     }
 
     public Integer getMedicineQuantity() {
-        return medicineQuantity;
+        return medicine_quantity;
     }
 
     public void setMedicineQuantity(Integer medicineQuantity) {
-        this.medicineQuantity = medicineQuantity;
+        this.medicine_quantity = medicineQuantity;
     }
 
     public String getMedicineSupplier() {
-        return medicineSupplier;
+        return medicine_supplier;
     }
 
     public void setMedicineSupplier(String medicineSupplier) {
-        this.medicineSupplier = medicineSupplier;
+        this.medicine_supplier = medicineSupplier;
     }
 
     public Boolean getMedicineLegitimacy() {
-        return medicineLegitimacy;
+        return medicine_legitimacy;
     }
 
     public void setMedicineLegitimacy(Boolean medicineLegitimacy) {
-        this.medicineLegitimacy = medicineLegitimacy;
+        this.medicine_legitimacy = medicineLegitimacy;
     }
 
     public Boolean getMedicineForPregnant() {
-        return isMedicineForPregnant;
+        return is_medicine_for_pregnant;
     }
 
     public void setMedicineForPregnant(Boolean medicineForPregnant) {
-        isMedicineForPregnant = medicineForPregnant;
+        is_medicine_for_pregnant = medicineForPregnant;
     }
 
     public String getMedicineInstructions() {
-        return medicineInstructions;
+        return medicine_instructions;
     }
 
     public void setMedicineInstructions(String medicineInstructions) {
-        this.medicineInstructions = medicineInstructions;
+        this.medicine_instructions = medicineInstructions;
     }
 
     public Double getMedicinePrice() {
-        return medicinePrice;
+        return medicine_price;
     }
 
     public void setMedicinePrice(Double medicinePrice) {
-        this.medicinePrice = medicinePrice;
+        this.medicine_price = medicinePrice;
     }
 }
