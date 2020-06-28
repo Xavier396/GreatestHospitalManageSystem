@@ -21,4 +21,9 @@ public class PatientsServiceImpl implements PatientsService {
     public Patients fetchOne(String condition) {
         return patientsDao.fetchOne(condition);
     }
+
+    @Override
+    public void insertOne(Patients p) {
+        patientsDao.insertOne(p);
+    }
 }

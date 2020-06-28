@@ -20,4 +20,9 @@ public class PasswordServiceImpl implements PasswordService {
     public Password fetchOne(String s) {
         return passwordDao.fetchOne(s);
     }
+
+    @Override
+    public void insertOne(Password password) {
+        passwordDao.insertOne(password);
+    }
 }

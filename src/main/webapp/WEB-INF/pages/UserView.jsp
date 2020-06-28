@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: yanghaijia
-  Date: 2020/6/24
-  Time: 1:36 下午
+  User: yhjzs
+  Date: 2020/6/28
+  Time: 14:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
@@ -10,7 +10,7 @@
 <%@taglib prefix="function" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <title>管理员后台</title>
+    <title>用户列表</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -38,9 +38,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">功能 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="./admin/staffManager">员工管理</a></li>
-                        <li><a href="./admin/userManager">病人信息管理</a></li>
-
+                        <li><a href="./staffManager">员工管理</a></li>
+                        <li><a href="./userManager">病人信息管理</a></li>
+                        <li><a href="./medicineManager">药品管理</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">科室医生一览</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
             </ul>
@@ -63,18 +67,24 @@
         <option value="${c.department}">${c.department}</option>
     </c:forEach>
 </select>
-    输入关键词搜索:<input type="text" class="form-control" placeholder="Search">
+    <label>
+        输入关键词搜索:
+        <input type="text" class="form-control" placeholder="Search">
+    </label>
     <button type="submit" class="btn btn-default">搜索</button>
 
-    每页显示<select name="limit" class="form-control">
-    <option value=5>5</option>
-    <option value=10>10</option>
-    <option value=15 selected>15</option>
-    <option value=20>20</option>
-</select>
+    <label>
+        每页显示
+        <select name="limit" class="form-control">
+            <option value=5>5</option>
+            <option value=10>10</option>
+            <option value=15 selected>15</option>
+            <option value=20>20</option>
+        </select>
+    </label>
 </form>
-    <button class="btn btn-info" onclick="gotoAddUser()">添加病人信息</button>
-    <button class="btn btn-info" onclick="gotoAddStaff()">添加医生信息</button>
+<button class="btn btn-info" onclick="gotoAddUser()">添加病人信息</button>
+<button class="btn btn-info" onclick="gotoAddStaff()">添加医生信息</button>
 
 <table class="table table-bordered">
     <thead>
@@ -91,15 +101,19 @@
     <tbody>
 
     <c:forEach items="${allstaff}" var="s">
-            <td>${s.workerId}</td>
-            <td>${s.workerName}</td>
-            <td>${s.workerDepartment}</td>
-            <td>${s.workerPhone}</td>
-            <td>${s.workerEmail}</td>
-            <td>${s.workerOtherNote}</td>
+        <%! int i = 1;%>
+        <tr>
+            <td><%=i++%>
+            </td>
+            <td>${s.p_id}</td>
+            <td>${s.p_name}</td>
+            <td>${s.p_department}</td>
+            <td>${s.p_tel}</td>
+            <td>${s.p_email}</td>
+            <td>${s.p_allergic}</td>
             <td>
-                <button onclick="removeUser('${s.workerId}')" class="btn btn-danger">删除</button>
-                <button onclick="" class="btn btn-info">修改数据</button>
+                <button class="btn btn-danger">删除</button>
+                <button class="btn btn-info">修改数据</button>
             </td>
         </tr>
 
@@ -108,27 +122,11 @@
 </table>
 <script>
     function gotoAddStaff() {
-        window.location.href="./admin/addstaff"
+        window.location.href="./addstaff"
     }
 
     function gotoAddUser() {
-        window.location.href="./admin/adduser"
-    }
-
-    function removeUser(id)
-    {
-        let c=confirm("你真的要删除吗？");
-        if (c==true)
-        {
-            window.location.href="./admin/removedoctor/"+id;
-        }
-        else {
-            alert("未删除任何内容");
-        }
-    }
-
-    function editUser(id) {
-        window.location.href="./admin/editdoctor/"+id;
+        window.location.href="./adduser"
     }
 </script>
 </body>

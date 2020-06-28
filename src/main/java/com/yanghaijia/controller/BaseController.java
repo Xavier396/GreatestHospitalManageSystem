@@ -171,7 +171,7 @@ public class BaseController {
         List<Department> dps=departmentService.fetchAll();
         m.addAttribute("alldepart",dps);
 
-        String[] s=new String[]{"序号","唯一编号","姓名","所属科室","联系方式","邮箱","其他说明","操作"};
+        String[] s=new String[]{"唯一编号","姓名","所属科室","联系方式","邮箱","其他说明","操作"};
         List<Staff> allStaff=staffService.selectSome(0,15);
         List<Department> allDepart=departmentService.fetchAll();
         m.addAttribute("head",s);

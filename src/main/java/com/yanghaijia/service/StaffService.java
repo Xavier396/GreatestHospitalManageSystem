@@ -20,4 +20,8 @@ public interface StaffService {
     public Integer countAll();
 
     public List<Staff> fetchSome(String depart, String keywords);
+
+    public void insertOne(Staff s);
+
+    public void  deleteById( String uid);
 }

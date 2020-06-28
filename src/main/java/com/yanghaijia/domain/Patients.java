@@ -20,6 +20,7 @@ public class Patients {
     private String p_email;
     private String p_visit;
     private String p_prescript_id;
+    private String p_department;
 
     public Patients() {
     }
@@ -94,5 +95,13 @@ public class Patients {
 
     public void setP_prescript_id(String p_prescript_id) {
         this.p_prescript_id = p_prescript_id;
+    }
+
+    public String getP_department() {
+        return p_department;
+    }
+
+    public void setP_department(String p_department) {
+        this.p_department = p_department;
     }
 }

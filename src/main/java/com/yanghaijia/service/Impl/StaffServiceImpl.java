@@ -40,4 +40,14 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> fetchSome(String depart, String keywords) {
         return staffDao.fetchSome(depart,keywords);
     }
+
+    @Override
+    public void insertOne(Staff s) {
+        staffDao.insertOne(s);
+    }
+
+    @Override
+    public void deleteById(String uid) {
+        staffDao.deleteById(uid);
+    }
 }
