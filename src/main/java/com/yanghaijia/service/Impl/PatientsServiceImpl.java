@@ -18,6 +18,11 @@ public class PatientsServiceImpl implements PatientsService {
     }
 
     @Override
+    public List<Patients> fetchByDepartment(String depart) {
+        return patientsDao.fetchByDepartment(depart);
+    }
+
+    @Override
     public Patients fetchOne(String condition) {
         return patientsDao.fetchOne(condition);
     }
@@ -26,4 +31,15 @@ public class PatientsServiceImpl implements PatientsService {
     public void insertOne(Patients p) {
         patientsDao.insertOne(p);
     }
+
+    @Override
+    public void deleteById(String id) {
+        patientsDao.deleteById(id);
+    }
+
+    @Override
+    public void updatePre(String id,String pid) {
+        patientsDao.updatePre(id,pid);
+    }
+
 }

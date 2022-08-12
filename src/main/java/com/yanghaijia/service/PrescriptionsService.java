@@ -9,4 +9,8 @@ import java.util.List;
  */
 public interface PrescriptionsService {
     public List<Prescriptions> fetchAll();
+
+    public Prescriptions fetchOne(String id);
+
+    public void insertOne(Prescriptions p);
 }

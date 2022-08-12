@@ -41,6 +41,7 @@ public class AdminController {
     @Autowired
     private PatientsService patientsService;
 
+
     @RequestMapping("/staffManager")
     public String staffManager(Model m) {
         //表头
@@ -116,9 +117,15 @@ public class AdminController {
         response.sendRedirect(request.getContextPath()+"/admin");
     }
 
+    @RequestMapping("/removeuser/{id}")
+    public void removeUser(@PathVariable String id,HttpServletRequest request,HttpServletResponse response) throws IOException {
+        patientsService.deleteById(id);
+        response.sendRedirect(request.getContextPath()+"/admin");
+    }
+
     @RequestMapping("/savestaff")
     public String  saveStaff(Model m,String worker_name,String worker_birthday,String worker_phone,String worker_email,String worker_department,String worker_other_note ,HttpServletResponse response,HttpServletRequest request) throws IOException {
-        if (worker_phone.trim().length()==0||worker_phone==null||worker_name.trim().length()==0||worker_name==null||worker_birthday.trim().length()==0||worker_birthday==null||worker_email.trim().length()==0||worker_email==null||worker_department.trim().length()==0||worker_department==null||worker_other_note.trim().length()==0||worker_other_note==null)
+        if (worker_phone.trim().length()==0||worker_phone==null||worker_name.trim().length()==0||worker_name==null||worker_birthday.trim().length()==0||worker_birthday==null||worker_email.trim().length()==0||worker_email==null||worker_department.trim().length()==0||worker_department==null)
         {
             m.addAttribute("error", JSON.toJSONString(INCOMPLETE_FORM));
             return "Error";

@@ -30,7 +30,7 @@ public interface StaffDao {
     @Select("select count(*) from Staff")
     public Integer countAll();
 
-    @Select("select * from Staff where worker_department=#{depart} and (worker_realname like %#{keyword}% or worker_phone like %#{keyword}%)")
+    @Select("select * from Staff where worker_department=#{depart} and (worker_name like '%#{keyword}%' or worker_phone like '%#{keyword}%')")
     public List<Staff> fetchSome(@Param("depart") String depart,@Param("keyword") String keywords);
 
     @Insert("insert into Staff values(NULL,#{s.worker_id},#{s.worker_name},#{s.worker_birthday},#{s.worker_phone},#{s.worker_email},#{s.worker_department},#{s.worker_other_note},#{s.worker_role})")

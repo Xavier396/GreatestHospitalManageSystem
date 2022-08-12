@@ -15,4 +15,14 @@ public class PrescriptionsServiceImpl implements PrescriptionsService {
     public List<Prescriptions> fetchAll() {
         return prescriptionsDao.fetchAll();
     }
+
+    @Override
+    public Prescriptions fetchOne(String id) {
+        return prescriptionsDao.fetchOne(id);
+    }
+
+    @Override
+    public void insertOne(Prescriptions p) {
+        prescriptionsDao.insertOne(p);
+    }
 }

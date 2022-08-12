@@ -40,11 +40,6 @@
                     <ul class="dropdown-menu">
                         <li><a href="./staffManager">员工管理</a></li>
                         <li><a href="./userManager">病人信息管理</a></li>
-                        <li><a href="./medicineManager">药品管理</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">科室医生一览</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
             </ul>
@@ -60,29 +55,29 @@
 </nav>
 
 
-<form action="./admin/filter" method="post" class="form-group form-inline" align="center">
-    所属科室<select name="depart" class="form-control">
-    <option>请选择</option>
-    <c:forEach items="${alldepart}" var="c">
-        <option value="${c.department}">${c.department}</option>
-    </c:forEach>
-</select>
-    <label>
-        输入关键词搜索:
-        <input type="text" class="form-control" placeholder="Search">
-    </label>
-    <button type="submit" class="btn btn-default">搜索</button>
+<%--<form action="./admin/filter" method="post" class="form-group form-inline" align="center">--%>
+<%--    所属科室<select name="depart" class="form-control">--%>
+<%--    <option>请选择</option>--%>
+<%--    <c:forEach items="${alldepart}" var="c">--%>
+<%--        <option value="${c.department}">${c.department}</option>--%>
+<%--    </c:forEach>--%>
+<%--</select>--%>
+<%--    <label>--%>
+<%--        输入关键词搜索:--%>
+<%--        <input type="text" class="form-control" placeholder="Search">--%>
+<%--    </label>--%>
+<%--    <button type="submit" class="btn btn-default">搜索</button>--%>
 
-    <label>
-        每页显示
-        <select name="limit" class="form-control">
-            <option value=5>5</option>
-            <option value=10>10</option>
-            <option value=15 selected>15</option>
-            <option value=20>20</option>
-        </select>
-    </label>
-</form>
+<%--    <label>--%>
+<%--        每页显示--%>
+<%--        <select name="limit" class="form-control">--%>
+<%--            <option value=5>5</option>--%>
+<%--            <option value=10>10</option>--%>
+<%--            <option value=15 selected>15</option>--%>
+<%--            <option value=20>20</option>--%>
+<%--        </select>--%>
+<%--    </label>--%>
+<%--</form>--%>
 <button class="btn btn-info" onclick="gotoAddUser()">添加病人信息</button>
 <button class="btn btn-info" onclick="gotoAddStaff()">添加医生信息</button>
 
@@ -101,10 +96,9 @@
     <tbody>
 
     <c:forEach items="${allstaff}" var="s">
-        <%! int i = 1;%>
+
         <tr>
-            <td><%=i++%>
-            </td>
+
             <td>${s.p_id}</td>
             <td>${s.p_name}</td>
             <td>${s.p_department}</td>

@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,7 +47,6 @@ public class BaseController {
     public String gotoDoctor(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Cookie[] cookies = request.getCookies();
-
         for (Cookie c : cookies) {
             if (Objects.equals(c.getName(), "alreadyLogin")) {
                 switch (c.getValue()) {
@@ -99,49 +99,103 @@ public class BaseController {
             }
         }
 
-        if (TEXT_ZERO.equals(role)) {
-            //TODO 做一个数据库的查询，判断到你的数据库有没有这个账号 表单验证之类的
+        switch (role) {
+            case TEXT_ZERO: {
+                String passwordHash = new Md5Hash(password, null, 2).toString();
+                Password ps = passwordService.fetchOne(id);
+                if (ps == null) {
+                    String error = JSON.toJSONString(NO_SUCH_USER);
+                    model.addAttribute("error", error);
+                    return "Error";
+                } else if (!Objects.equals(ps.getPasswordHash(), passwordHash)) {
+                    String error = JSON.toJSONString(VERIFICATION_FAIL);
+                    model.addAttribute("error", error);
+                    return "Error";
+                }
+                if (CHECK_BOX_CHECKED.equals(savecookie)) {
+                    Cookie c = new Cookie("alreadyLogin", "asDoctor");
+                    Cookie c2 = new Cookie("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
+                    c.setMaxAge(10000);
+                    c2.setMaxAge(10000);
+                    response.addCookie(c);
+                    response.addCookie(c2);
+                    Cookie c3=new Cookie("id",ps.getUserId());
+                    c3.setMaxAge(10000);
+                    response.addCookie(c3);
 
-            if (CHECK_BOX_CHECKED.equals(savecookie)) {
-                Cookie c = new Cookie("alreadyLogin", "asDoctor");
-                c.setMaxAge(10000);
-                response.addCookie(c);
+                }
+                HttpSession s = request.getSession();
+                s.setAttribute("alreadyLogin", "asDoctor");
+                s.setAttribute("name", staffService.fetchOne(id).getWorkerName());
+                s.setAttribute("id",ps.getUserId());
+                response.sendRedirect(request.getContextPath() + "/doctor");
+                break;
             }
-            response.sendRedirect(request.getContextPath() + "/doctor");
-        } else if (TEXT_ONE.equals(role)) {
-            //TODO 做一个数据库的查询，判断到你的数据库有没有这个账号 表单验证之类的
-            if (CHECK_BOX_CHECKED.equals(savecookie)) {
-                Cookie c = new Cookie("alreadyLogin", "asUser");
-                c.setMaxAge(10000);
-                response.addCookie(c);
+            case TEXT_ONE: {
+                String passwordHash = new Md5Hash(password, null, 2).toString();
+                Password ps = passwordService.fetchOne(id);
+                if (ps == null) {
+                    String error = JSON.toJSONString(NO_SUCH_USER);
+                    model.addAttribute("error", error);
+                    return "Error";
+                } else if (!Objects.equals(ps.getPasswordHash(), passwordHash)) {
+                    String error = JSON.toJSONString(VERIFICATION_FAIL);
+                    model.addAttribute("error", error);
+                    return "Error";
+                }
+                if (CHECK_BOX_CHECKED.equals(savecookie)) {
+                    Cookie c = new Cookie("alreadyLogin", "asUser");
+                    Cookie c2 = new Cookie("name", patientsService.fetchOne(ps.getUserId()).getP_name());
+                    c.setMaxAge(10000);
+                    c2.setMaxAge(10000);
+                    response.addCookie(c);
+                    response.addCookie(c2);
+                    Cookie c3=new Cookie("id",ps.getUserId());
+                    c3.setMaxAge(10000);
+                    response.addCookie(c3);
+                    c.setMaxAge(10000);
+                    response.addCookie(c);
+                }
+                HttpSession s = request.getSession();
+                s.setAttribute("alreadyLogin", "asUser");
+                s.setAttribute("name", patientsService.fetchOne(ps.getUserId()).getP_name());
+                s.setAttribute("id",ps.getUserId());
+                response.sendRedirect(request.getContextPath() + "/user");
+                break;
             }
-            response.sendRedirect(request.getContextPath() + "/user");
-        } else if (TEXT_TWO.equals(role)) {
-            String passwordHash = new Md5Hash(password, null, 2).toString();
-//            System.out.println("note1:"+passwordHash);
-            Password ps = passwordService.fetchOne(id);
-//            System.out.println("note2:"+JSON.toJSONString(ps));
-            if (ps == null) {
-                String error = JSON.toJSONString(NO_SUCH_USER);
-                model.addAttribute("error", error);
-                return "Error";
-            } else if (!Objects.equals(ps.getPasswordHash(), passwordHash)) {
-                String error = JSON.toJSONString(VERIFICATION_FAIL);
-                model.addAttribute("error", error);
-                return "Error";
+            case TEXT_TWO: {
+                String passwordHash = new Md5Hash(password, null, 2).toString();
+                Password ps = passwordService.fetchOne(id);
+                if (ps == null) {
+                    String error = JSON.toJSONString(NO_SUCH_USER);
+                    model.addAttribute("error", error);
+                    return "Error";
+                } else if (!Objects.equals(ps.getPasswordHash(), passwordHash)) {
+                    String error = JSON.toJSONString(VERIFICATION_FAIL);
+                    model.addAttribute("error", error);
+                    return "Error";
+                }
+                if (CHECK_BOX_CHECKED.equals(savecookie)) {
+                    Cookie c = new Cookie("alreadyLogin", "asAdmin");
+                    Cookie c2 = new Cookie("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
+
+                    c.setMaxAge(10000);
+                    c2.setMaxAge(10000);
+                    response.addCookie(c);
+                    response.addCookie(c2);
+                    Cookie c3=new Cookie("id",ps.getUserId());
+                    c3.setMaxAge(10000);
+                    response.addCookie(c3);
+                }
+                HttpSession s = request.getSession();
+                s.setAttribute("alreadyLogin", "asAdmin");
+                s.setAttribute("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
+                s.setAttribute("id",ps.getUserId());
+                response.sendRedirect(request.getContextPath() + "/admin");
+                break;
             }
-            if (CHECK_BOX_CHECKED.equals(savecookie)) {
-                Cookie c = new Cookie("alreadyLogin", "asAdmin");
-                Cookie c2 = new Cookie("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
-                c.setMaxAge(10000);
-                c2.setMaxAge(10000);
-                response.addCookie(c);
-                response.addCookie(c2);
-            }
-            HttpSession s = request.getSession();
-            s.setAttribute("alreadyLogin", "asAdmin");
-            s.setAttribute("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
-            response.sendRedirect(request.getContextPath() + "/admin");
+            default:
+                break;
         }
         return null;
 
@@ -160,22 +214,20 @@ public class BaseController {
         HttpSession httpSession = request.getSession();
         if (httpSession.getAttribute("whoareyou") != null) {
             m.addAttribute("userName", httpSession.getAttribute("whoareyou"));
-        }
-        else {
+        } else {
             for (Cookie c : allcookie) {
                 if ("name".equals(c.getName())) {
                     m.addAttribute("userName", c.getValue());
                 }
             }
         }
-        List<Department> dps=departmentService.fetchAll();
-        m.addAttribute("alldepart",dps);
-
-        String[] s=new String[]{"唯一编号","姓名","所属科室","联系方式","邮箱","其他说明","操作"};
-        List<Staff> allStaff=staffService.selectSome(0,15);
-        List<Department> allDepart=departmentService.fetchAll();
-        m.addAttribute("head",s);
-        m.addAttribute("allstaff",allStaff);
+        List<Department> dps = departmentService.fetchAll();
+        m.addAttribute("alldepart", dps);
+        String[] s = new String[]{"唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
+        List<Staff> allStaff = staffService.selectSome(0, 15);
+        List<Department> allDepart = departmentService.fetchAll();
+        m.addAttribute("head", s);
+        m.addAttribute("allstaff", allStaff);
         return "Admin";
     }
 
@@ -183,35 +235,42 @@ public class BaseController {
     public String doctor(Model m, HttpServletResponse response, HttpServletRequest request) {
         Cookie[] allcookie = request.getCookies();
         HttpSession httpSession = request.getSession();
-
+        String id= "";
         if (httpSession.getAttribute("whoareyou") != null) {
             m.addAttribute("userName", httpSession.getAttribute("whoareyou"));
-        }
-        else {
+        } else {
             for (Cookie c : allcookie) {
                 if ("name".equals(c.getName())) {
                     m.addAttribute("userName", c.getValue());
                 }
             }
         }
-
+        id= (String) httpSession.getAttribute("id");
+        String[] s = new String[]{"唯一编号", "姓名", "联系方式", "邮箱", "其他说明", "操作"};
+        List<Patients> allStaff = patientsService.fetchByDepartment(staffService.fetchOne(id).getWorkerDepartment());
+        m.addAttribute("head", s);
+        m.addAttribute("allstaff", allStaff);
         return "Doctor";
     }
 
-//安全退出，把cookie和session都给抹了
+    //安全退出，把cookie和session都给抹了
     @RequestMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession s = request.getSession();
         s.removeAttribute("userName");
         s.removeAttribute("alreadyLogin");
-        Cookie c1=new Cookie("name",null);
+        Cookie c1 = new Cookie("name", null);
         c1.setMaxAge(0);
-//        c1.setPath("/");
-       Cookie c2=new Cookie("alreadyLogin",null);
-//       c2.setPath("/");
-       c2.setMaxAge(0);
-       response.addCookie(c1);
-       response.addCookie(c2);
-       response.sendRedirect(request.getContextPath());
+        Cookie c2 = new Cookie("alreadyLogin", null);
+        c2.setMaxAge(0);
+        response.addCookie(c1);
+        response.addCookie(c2);
+        response.sendRedirect(request.getContextPath());
+    }
+
+    @RequestMapping("/user")
+    public String gotoUser() {
+
+        return "User";
     }
 }

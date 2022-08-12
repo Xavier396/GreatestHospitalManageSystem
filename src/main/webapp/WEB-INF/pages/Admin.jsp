@@ -48,7 +48,7 @@
 
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">欢迎您，管理员${userName}</a></li>
+                <li><a href="#">欢迎您 管理员${userName}</a></li>
                 <li><a href="./logout">安全退出</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
