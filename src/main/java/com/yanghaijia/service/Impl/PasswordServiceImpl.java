@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service("PasswordService")
+@Service
 public class PasswordServiceImpl implements PasswordService {
     @Autowired
     private PasswordDao passwordDao;

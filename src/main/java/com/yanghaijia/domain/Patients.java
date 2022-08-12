@@ -1,8 +1,11 @@
 package com.yanghaijia.domain;
 
+import lombok.Data;
+
 /**
  * @author yanghaijia
  */
+@Data
 public class Patients {
     /**
      * <p>
@@ -11,6 +14,7 @@ public class Patients {
      *     pPrescriptId:病人的处方号
      * </p>
      * */
+
     private Integer id;
     private String p_id;
     private String p_name;

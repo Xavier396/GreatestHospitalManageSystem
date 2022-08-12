@@ -3264,7 +3264,6 @@ CREATE TABLE "Password" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   "user_id" text NOT NULL,
   "password_hash" TEXT NOT NULL,
-  CONSTRAINT "Password_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "_Staff_old_20200618" ("") ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT "user_id" UNIQUE ("user_id" COLLATE BINARY) ON CONFLICT FAIL
 );
 
@@ -3277,13 +3276,12 @@ CREATE TABLE "Patients" (
   "p_id" text NOT NULL,
   "p_name" TEXT,
   "p_birthday" TEXT,
-  "p_allergic" TEXT NOT NULL DEFAULT 无,
+  "p_allergic" TEXT NOT NULL DEFAULT '无',
   "p_tel" TEXT,
   "p_email" TEXT,
   "p_visit" TEXT,
   "p_prescript_id" text NOT NULL,
-  PRIMARY KEY ("id", "p_id", "p_prescript_id"),
-  CONSTRAINT "prescription_id" FOREIGN KEY ("p_prescript_id") REFERENCES "_Rescriptions_old_20200618" ("prescription_id") ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY ("id", "p_id", "p_prescript_id")
 );
 
 -- ----------------------------
@@ -3311,8 +3309,7 @@ CREATE TABLE "Staff" (
   "worker_department" text,
   "worker_other_note" text,
   "worker_role" TEXT,
-  CONSTRAINT "Staff_pk" PRIMARY KEY ("worker_id"),
-  CONSTRAINT "Staff_department_fk" FOREIGN KEY ("worker_department") REFERENCES "Department" ("") ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT "Staff_pk" PRIMARY KEY ("worker_id")
 );
 
 -- ----------------------------
@@ -3333,7 +3330,6 @@ COMMIT;
 -- ----------------------------
 -- Auto increment value for Medicine
 -- ----------------------------
-UPDATE "main"."sqlite_sequence" SET seq = 3206 WHERE name = 'Medicine';
 
 -- ----------------------------
 -- Indexes structure for table Medicine

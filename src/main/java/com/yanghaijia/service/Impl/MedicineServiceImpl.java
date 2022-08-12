@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service("MedicineService")
+@Service
 public class MedicineServiceImpl implements MedicineService {
     @Autowired
     private MedicineDao medicineDao;

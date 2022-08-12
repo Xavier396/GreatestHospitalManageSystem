@@ -1,0 +1,20 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:C:/Users/yhjzs/Documents/Workspace/GreatestHospitalManageSystem/database/hospital
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 600000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      pool-name: mypool
+      connection-test-query: SELECT 1
+  thymeleaf:
+    mode: HTML
+    prefix: /WEB-INF/views/
+    suffix: .jsp
