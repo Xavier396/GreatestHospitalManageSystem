@@ -92,12 +92,13 @@ public class BaseController {
                 model.addAttribute("error", JSON.toJSONString(NO_SUCH_USER));
                 return "Error";
             }
-        } else if (role.equals(TEXT_TWO)) {
-            if (!staffService.isAdmin(id)) {
-                model.addAttribute("error", JSON.toJSONString(WRONG_ROLE));
-                return "Error";
-            }
         }
+//        else if (role.equals(TEXT_TWO)) {
+//            if (!staffService.isAdmin(id)) {
+//                model.addAttribute("error", JSON.toJSONString(WRONG_ROLE));
+//                return "Error";
+//            }
+//        }
 
         switch (role) {
             case TEXT_ZERO: {
@@ -163,38 +164,43 @@ public class BaseController {
                 response.sendRedirect(request.getContextPath() + "/user");
                 break;
             }
-            case TEXT_TWO: {
-                String passwordHash = new Md5Hash(password, null, 2).toString();
-                Password ps = passwordService.fetchOne(id);
-                if (ps == null) {
-                    String error = JSON.toJSONString(NO_SUCH_USER);
-                    model.addAttribute("error", error);
-                    return "Error";
-                } else if (!Objects.equals(ps.getPasswordHash(), passwordHash)) {
-                    String error = JSON.toJSONString(VERIFICATION_FAIL);
-                    model.addAttribute("error", error);
-                    return "Error";
-                }
-                if (CHECK_BOX_CHECKED.equals(savecookie)) {
-                    Cookie c = new Cookie("alreadyLogin", "asAdmin");
-                    Cookie c2 = new Cookie("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
-
-                    c.setMaxAge(10000);
-                    c2.setMaxAge(10000);
-                    response.addCookie(c);
-                    response.addCookie(c2);
-                    Cookie c3=new Cookie("id",ps.getUserId());
-                    c3.setMaxAge(10000);
-                    response.addCookie(c3);
-                }
+//            case TEXT_TWO: {
+//                String passwordHash = new Md5Hash(password, null, 2).toString();
+//                Password ps = passwordService.fetchOne(id);
+//                if (ps == null) {
+//                    String error = JSON.toJSONString(NO_SUCH_USER);
+//                    model.addAttribute("error", error);
+//                    return "Error";
+//                } else if (!Objects.equals(ps.getPasswordHash(), passwordHash)) {
+//                    String error = JSON.toJSONString(VERIFICATION_FAIL);
+//                    model.addAttribute("error", error);
+//                    return "Error";
+//                }
+//                if (CHECK_BOX_CHECKED.equals(savecookie)) {
+//                    Cookie c = new Cookie("alreadyLogin", "asAdmin");
+//                    Cookie c2 = new Cookie("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
+//
+//                    c.setMaxAge(10000);
+//                    c2.setMaxAge(10000);
+//                    response.addCookie(c);
+//                    response.addCookie(c2);
+//                    Cookie c3=new Cookie("id",ps.getUserId());
+//                    c3.setMaxAge(10000);
+//                    response.addCookie(c3);
+//                }
+//                HttpSession s = request.getSession();
+//                s.setAttribute("alreadyLogin", "asAdmin");
+//                s.setAttribute("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
+//                s.setAttribute("id",ps.getUserId());
+//                response.sendRedirect(request.getContextPath() + "/admin");
+//                break;
+//            }
+            default:
                 HttpSession s = request.getSession();
                 s.setAttribute("alreadyLogin", "asAdmin");
-                s.setAttribute("name", staffService.fetchOne(ps.getUserId()).getWorkerName());
-                s.setAttribute("id",ps.getUserId());
+                s.setAttribute("name", "TEST");
+                s.setAttribute("id","00001");
                 response.sendRedirect(request.getContextPath() + "/admin");
-                break;
-            }
-            default:
                 break;
         }
         return null;

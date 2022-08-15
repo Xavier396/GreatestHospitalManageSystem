@@ -1,14 +1,15 @@
-<%--
+<!--
   Created by IntelliJ IDEA.
   User: yanghaijia
   Date: 2020/6/24
   Time: 1:36 下午
   To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="function" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html>
+-->
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>-->
+<!--<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
+<!--<%@taglib prefix="function" uri="http://java.sun.com/jsp/jstl/functions" %>-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>管理员后台</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +49,7 @@
 
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">欢迎您 管理员${userName}</a></li>
+                <li><a href="#">欢迎您 管理员<span th:text="${userName}"></span></a></li>
                 <li><a href="./logout">安全退出</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -57,11 +58,11 @@
 
 
 <form action="./admin/filter" method="post" class="form-group form-inline" align="center">
-    所属科室<select name="depart" class="form-control">
+    所属科室<select name="depart" class="form-control" th:each="c:${alldepart}">
     <option>请选择</option>
-    <c:forEach items="${alldepart}" var="c">
-        <option value="${c.department}">${c.department}</option>
-    </c:forEach>
+
+        <option th:value="${c.department}" th:text="${c.department}"></option>
+
 </select>
     输入关键词搜索:<input type="text" class="form-control" placeholder="Search">
     <button type="submit" class="btn btn-default">搜索</button>
@@ -78,19 +79,18 @@
 
 <table class="table table-bordered">
     <thead>
-    <tr>
-        <c:forEach items="${head}" var="s">
-            <th>
-                    ${s}
+    <tr th:each="s:${head}">
+            <th th:text="${s}">
+
             </th>
 
-        </c:forEach>
+
     </tr>
     </thead>
 
-    <tbody>
+    <tbody th:each="s:${allstaff}">
 
-    <c:forEach items="${allstaff}" var="s">
+    <tr>
             <td>${s.workerId}</td>
             <td>${s.workerName}</td>
             <td>${s.workerDepartment}</td>
@@ -98,12 +98,13 @@
             <td>${s.workerEmail}</td>
             <td>${s.workerOtherNote}</td>
             <td>
-                <button onclick="removeUser('${s.workerId}')" class="btn btn-danger">删除</button>
+<!--                onclick="removeUser('')"-->
+                <button  th:onclick="'javascript:removeUser('+this+','+${s.workerId}+');'" class="btn btn-danger">删除</button>
                 <button onclick="" class="btn btn-info">修改数据</button>
             </td>
         </tr>
 
-    </c:forEach>
+
     </tbody>
 </table>
 <script>
@@ -115,7 +116,7 @@
         window.location.href="./admin/adduser"
     }
 
-    function removeUser(id)
+    function removeUser(obj,id)
     {
         let c=confirm("你真的要删除吗？");
         if (c==true)

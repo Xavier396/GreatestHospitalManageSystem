@@ -1,14 +1,15 @@
-<%--
+<!--
   Created by IntelliJ IDEA.
   User: yhjzs
   Date: 2020/6/28
   Time: 0:14
   To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="function" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html>
+-->
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>-->
+<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
+<!--<%@ taglib prefix="function" uri="http://java.sun.com/jsp/jstl/functions" %>-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
@@ -42,11 +43,9 @@
         <br/>
         <label>
             部门
-            <select name="worker_department" class="form-control">
+            <select name="worker_department" class="form-control" th:each="c:${allDepart}">
                 <option>请选择</option>
-                <c:forEach items="${allDepart}" var="c">
-                    <option value="${c.department}">${c.department}</option>
-                </c:forEach>
+                <option th:value="${c.department}" th:text="${c.department}"></option>
             </select>
         </label>
         <br/>
