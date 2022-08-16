@@ -56,7 +56,7 @@
     </tx:advice>
     <!--配置AOP增强-->
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.yanghaijia.service.Impl.*ServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.yanghaijia.service.impl.*ServiceImpl.*(..))"/>
     </aop:config>
 
 </beans>

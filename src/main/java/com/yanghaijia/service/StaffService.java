@@ -1,27 +1,13 @@
 package com.yanghaijia.service;
 
-import com.yanghaijia.domain.Staff;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import com.yanghaijia.domain.StaffN;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * @author yhjzs
- */
-public interface StaffService {
-    public List<Staff> fetchAll();
+* @author yhjzs
+* @description 针对表【Staff】的数据库操作Service
+* @createDate 2022-08-15 09:36:23
+*/
+public interface StaffService extends IService<StaffN> {
 
-    public Staff fetchOne(String condition);
-
-    public Boolean isAdmin( String condition );
-
-    public List<Staff> selectSome(int offset, int limit);
-
-    public Integer countAll();
-
-    public List<Staff> fetchSome(String depart, String keywords);
-
-    public void insertOne(Staff s);
-
-    public void  deleteById( String uid);
 }

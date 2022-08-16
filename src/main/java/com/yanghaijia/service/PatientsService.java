@@ -1,23 +1,13 @@
 package com.yanghaijia.service;
 
-import com.yanghaijia.domain.Patients;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import com.yanghaijia.domain.PatientsN;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * @author yhjzs
- */
-public interface PatientsService {
-    public List<Patients> fetchAll();
+* @author yhjzs
+* @description 针对表【Patients】的数据库操作Service
+* @createDate 2022-08-15 09:36:06
+*/
+public interface PatientsService extends IService<PatientsN> {
 
-    public List<Patients> fetchByDepartment(String depart);
-
-    public Patients fetchOne(String condition);
-
-    public void insertOne(Patients p);
-
-    public void deleteById(String id);
-
-    public void updatePre(String id,String pid);
 }

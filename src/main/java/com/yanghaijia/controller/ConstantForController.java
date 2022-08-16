@@ -15,8 +15,6 @@ import com.yanghaijia.domain.Error;
  * checkBox
  * {@value #CHECK_BOX_CHECKED} CHECK_BOX_CHECKED指选择框被勾选了的状态，但是html里面没有true
  * <p>
- * 错误代码
- * {@value #INCOMPLETE_FORM} IMCOMPLETE_FORM，账号输入错误，返回此错误
  */
 public class ConstantForController {
 

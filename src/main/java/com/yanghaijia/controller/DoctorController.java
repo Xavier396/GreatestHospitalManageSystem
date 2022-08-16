@@ -2,7 +2,9 @@ package com.yanghaijia.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.yanghaijia.domain.Patients;
+import com.yanghaijia.domain.PatientsN;
 import com.yanghaijia.domain.Prescriptions;
+import com.yanghaijia.domain.PrescriptionsN;
 import com.yanghaijia.service.PatientsService;
 import com.yanghaijia.service.PrescriptionsService;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -36,19 +38,19 @@ private PatientsService patientsService;
     }
     @RequestMapping(value = "/add")
     public String giveout(Model m, String context , String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        if (context.trim().length()==0||context==null)
+        if (context == null || context.trim().length() == 0)
         {
             m.addAttribute("error", JSON.toJSONString(INCOMPLETE_FORM));
             return "Error";
         }
-        Prescriptions p=new Prescriptions();
-        p.setPrescriptionDateTime(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-        p.setPrescriptionContent(context);
+        PrescriptionsN p=new PrescriptionsN();
+        p.setPrescriptionDatetime(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
+        p.setRescription(context);
         String pres="P"+ RandomStringUtils.random(6,true,true);
         p.setPrescriptionId(pres);
-        prescriptionsService.insertOne(p);
-        patientsService.updatePre(id,pres);
-
+        prescriptionsService.save(p);
+        patientsService.lambdaUpdate().set(PatientsN::getPPrescriptId,pres).eq(PatientsN::getId,id).update();
+//id,pres
         response.sendRedirect(request.getContextPath());
         return  null;
     }

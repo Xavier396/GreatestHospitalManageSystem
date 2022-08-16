@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanghaijia.mapper.MedicineMapper">
+
+    <resultMap id="BaseResultMap" type="com.yanghaijia.domain.MedicineN">
+            <id property="id" column="id" jdbcType="OTHER"/>
+            <result property="medicineName" column="medicine_name" jdbcType="VARCHAR"/>
+            <result property="medicineQuantity" column="medicine_quantity" jdbcType="OTHER"/>
+            <result property="medicineSupplier" column="medicine_supplier" jdbcType="VARCHAR"/>
+            <result property="medicineLegitimacy" column="medicine_legitimacy" jdbcType="OTHER"/>
+            <result property="isMedicineForPregnant" column="is_medicine_for_pregnant" jdbcType="OTHER"/>
+            <result property="medicineInstructions" column="medicine_instructions" jdbcType="VARCHAR"/>
+            <result property="medicinePrice" column="medicine_price" jdbcType="REAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,medicine_name,medicine_quantity,
+        medicine_supplier,medicine_legitimacy,is_medicine_for_pregnant,
+        medicine_instructions,medicine_price
+    </sql>
+</mapper>

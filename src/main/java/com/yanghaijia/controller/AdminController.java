@@ -1,22 +1,22 @@
 package com.yanghaijia.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.yanghaijia.domain.Department;
-import com.yanghaijia.domain.Password;
-import com.yanghaijia.domain.Patients;
-import com.yanghaijia.domain.Staff;
+import com.yanghaijia.domain.DepartmentN;
+import com.yanghaijia.domain.PasswordN;
+import com.yanghaijia.domain.PatientsN;
+import com.yanghaijia.domain.StaffN;
 import com.yanghaijia.service.DepartmentService;
 import com.yanghaijia.service.PasswordService;
 import com.yanghaijia.service.PatientsService;
 import com.yanghaijia.service.StaffService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.apache.commons.lang3.RandomStringUtils;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +25,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
-import static com.yanghaijia.controller.ConstantForController.*;
+import static com.yanghaijia.controller.ConstantForController.INCOMPLETE_FORM;
 
 @Controller
 @RequestMapping("/admin")
@@ -46,8 +45,8 @@ public class AdminController {
     public String staffManager(Model m) {
         //表头
         String[] s = new String[]{ "唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
-        List<Staff> allStaff = staffService.fetchAll();
-        List<Department> allDepart = departmentService.fetchAll();
+        List<StaffN> allStaff = staffService.list();
+        List<DepartmentN> allDepart = departmentService.list();
         m.addAttribute("head", s);
         m.addAttribute("allstaff", allStaff);
         m.addAttribute("alldepart",allDepart);
@@ -58,8 +57,8 @@ public class AdminController {
     public String userManager(Model m)
     {
         String [] s=new String[]{ "唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
-        List<Patients> allPatient=patientsService.fetchAll();
-        List<Department> allDepart = departmentService.fetchAll();
+        List<PatientsN> allPatient=patientsService.list();
+        List<DepartmentN> allDepart = departmentService.list();
         m.addAttribute("head", s);
         m.addAttribute("allstaff", allPatient);
         m.addAttribute("alldepart",allDepart);
@@ -88,7 +87,7 @@ public class AdminController {
     @RequestMapping("/addstaff")
     public String addStaff(Model m)
     {
-        List<Department> allDepart=departmentService.fetchAll();
+        List<DepartmentN> allDepart=departmentService.list();
         m.addAttribute("allDepart",allDepart);
         return "AddStaff";
     }
@@ -96,7 +95,7 @@ public class AdminController {
     @RequestMapping("/adduser")
     public String addUser(Model m)
     {
-        List<Department> departments=departmentService.fetchAll();
+        List<DepartmentN> departments=departmentService.list();
         m.addAttribute("alldepart",departments);
         return "AddUser";
     }
@@ -105,7 +104,7 @@ public class AdminController {
     public String filter(Model m, Integer limit ,String depart,String keyword)
     {
         String[] s = new String[]{"序号", "唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
-        List<Staff> allStaff=staffService.fetchSome(depart,keyword);
+        List<StaffN> allStaff=staffService.lambdaQuery().eq(StaffN::getWorkerDepartment,depart).like(StaffN::getWorkerName,keyword).or().like(StaffN::getWorkerPhone,keyword).list();
         m.addAttribute("head", s);
         m.addAttribute("allstaff", allStaff);
         return "Admin";
@@ -113,13 +112,13 @@ public class AdminController {
 
     @RequestMapping("/removedoctor/{id}")
     public void  removeDoctor(@PathVariable String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        staffService.deleteById(id);
+        staffService.removeById(id);
         response.sendRedirect(request.getContextPath()+"/admin");
     }
 
     @RequestMapping("/removeuser/{id}")
     public void removeUser(@PathVariable String id,HttpServletRequest request,HttpServletResponse response) throws IOException {
-        patientsService.deleteById(id);
+        patientsService.removeById(id);
         response.sendRedirect(request.getContextPath()+"/admin");
     }
 
@@ -130,7 +129,7 @@ public class AdminController {
             m.addAttribute("error", JSON.toJSONString(INCOMPLETE_FORM));
             return "Error";
         }
-        Staff staff=new Staff();
+        StaffN staff=new StaffN();
         staff.setWorkerId("B"+RandomStringUtils.random(6,true,true));
         staff.setWorkerRole("Doctor");
         staff.setWorkerName(worker_name);
@@ -139,12 +138,11 @@ public class AdminController {
         staff.setWorkerEmail(worker_email);
         staff.setWorkerDepartment(worker_department);
         staff.setWorkerOtherNote(worker_other_note);
-        staffService.insertOne(staff);
-        Password password=new Password();
+        staffService.save(staff);
+        PasswordN password=new PasswordN();
         password.setUserId(staff.getWorkerId());
-        password.setUserPhone(staff.getWorkerPhone());
         password.setPasswordHash(new Md5Hash("123456",null,2).toString());
-        passwordService.insertOne(password);
+        passwordService.save(password);
         response.sendRedirect(request.getContextPath()+"/admin");
         return null;
 
@@ -158,21 +156,19 @@ public class AdminController {
             m.addAttribute("error",JSON.toJSONString(INCOMPLETE_FORM));
             return "Error";
         }
-        Patients p=new Patients();
-        p.setP_name(name);
-        p.setP_birthday(birthday);
-        p.setP_allergic(allergic);
-        p.setP_tel(phone);
-        p.setP_email(email);
-        p.setP_id("C"+RandomStringUtils.random(6,true,true));
-        p.setP_visit(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        p.setP_department(depart);
-        patientsService.insertOne(p);
-        Password password=new Password();
-        password.setUserPhone(phone);
+        PatientsN p=new PatientsN();
+        p.setPName(name);
+        p.setPBirthday(birthday);
+        p.setPAllergic(allergic);
+        p.setPTel(phone);
+        p.setPEmail(email);
+        p.setPId("C"+RandomStringUtils.random(6,true,true));
+        p.setPVisit(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        patientsService.save(p);
+        PasswordN password=new PasswordN();
         password.setPasswordHash(new Md5Hash("123456",null,2).toString());
-        password.setUserId(p.getP_id());
-        passwordService.insertOne(password);
+        password.setUserId(p.getPId());
+        passwordService.save(password);
         response.sendRedirect(request.getContextPath()+"/admin");
         return null;
     }

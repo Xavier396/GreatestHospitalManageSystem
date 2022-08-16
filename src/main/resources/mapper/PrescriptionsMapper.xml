@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanghaijia.mapper.PrescriptionsMapper">
+
+    <resultMap id="BaseResultMap" type="com.yanghaijia.domain.PrescriptionsN">
+            <id property="id" column="id" jdbcType="OTHER"/>
+            <result property="prescriptionId" column="prescription_id" jdbcType="VARCHAR"/>
+            <result property="rescription" column="rescription" jdbcType="VARCHAR"/>
+            <result property="prescriptionDatetime" column="prescription_datetime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,prescription_id,rescription,
+        prescription_datetime
+    </sql>
+</mapper>
