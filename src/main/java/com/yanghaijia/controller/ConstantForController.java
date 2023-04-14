@@ -1,6 +1,6 @@
 package com.yanghaijia.controller;
 
-import com.yanghaijia.domain.Error;
+import com.yanghaijia.frame.Error;
 
 /**
  * @author yhjzs

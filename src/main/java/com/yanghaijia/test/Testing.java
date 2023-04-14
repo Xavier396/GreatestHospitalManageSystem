@@ -1,6 +1,6 @@
 package com.yanghaijia.test;
 
-import com.yanghaijia.service.StaffService;
+import com.yanghaijia.dao.StaffService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

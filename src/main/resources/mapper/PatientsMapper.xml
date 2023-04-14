@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanghaijia.mapper.PatientsMapper">
+
+    <resultMap id="BaseResultMap" type="com.yanghaijia.domain.Patients">
+            <id property="id" column="id" jdbcType="OTHER"/>
+            <result property="pId" column="p_id" jdbcType="VARCHAR"/>
+            <result property="pName" column="p_name" jdbcType="VARCHAR"/>
+            <result property="pBirthday" column="p_birthday" jdbcType="VARCHAR"/>
+            <result property="pAllergic" column="p_allergic" jdbcType="VARCHAR"/>
+            <result property="pTel" column="p_tel" jdbcType="VARCHAR"/>
+            <result property="pEmail" column="p_email" jdbcType="VARCHAR"/>
+            <result property="pVisit" column="p_visit" jdbcType="VARCHAR"/>
+            <result property="pPrescriptId" column="p_prescript_id" jdbcType="VARCHAR"/>
+            <result property="pDepartment" column="p_department" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,p_id,p_name,
+        p_birthday,p_allergic,p_tel,
+        p_email,p_visit,p_prescript_id,
+        p_department
+    </sql>
+</mapper>

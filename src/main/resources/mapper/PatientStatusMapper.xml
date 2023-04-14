@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanghaijia.mapper.PatientStatusMapper">
+
+    <resultMap id="BaseResultMap" type="com.yanghaijia.domain.PatientStatus">
+            <id property="id" column="id" jdbcType="OTHER"/>
+            <result property="pId" column="p_id" jdbcType="VARCHAR"/>
+            <result property="pStatus" column="p_status" jdbcType="VARCHAR"/>
+            <result property="pStay" column="p_stay" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,p_id,p_status,
+        p_stay
+    </sql>
+</mapper>

@@ -9,31 +9,31 @@ import lombok.Data;
 
 /**
  * 
- * @TableName Department
+ * @TableName patient_status
  */
-@TableName(value ="Department")
+@TableName(value ="patient_status")
 @Data
-public class Department implements Serializable {
+public class PatientStatus implements Serializable {
     /**
      * 
      */
-    @TableId
-    private String department;
-
-    /**
-     * 
-     */
+    @TableId(type = IdType.AUTO)
     private Object id;
 
     /**
      * 
      */
-    private String uuid;
+    private String pId;
 
     /**
      * 
      */
-    private String depSn;
+    private String pStatus;
+
+    /**
+     * 
+     */
+    private String pStay;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -49,21 +49,21 @@ public class Department implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Department other = (Department) that;
-        return (this.getDepartment() == null ? other.getDepartment() == null : this.getDepartment().equals(other.getDepartment()))
-            && (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()))
-            && (this.getDepSn() == null ? other.getDepSn() == null : this.getDepSn().equals(other.getDepSn()));
+        PatientStatus other = (PatientStatus) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getPId() == null ? other.getPId() == null : this.getPId().equals(other.getPId()))
+            && (this.getPStatus() == null ? other.getPStatus() == null : this.getPStatus().equals(other.getPStatus()))
+            && (this.getPStay() == null ? other.getPStay() == null : this.getPStay().equals(other.getPStay()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
-        result = prime * result + ((getDepSn() == null) ? 0 : getDepSn().hashCode());
+        result = prime * result + ((getPId() == null) ? 0 : getPId().hashCode());
+        result = prime * result + ((getPStatus() == null) ? 0 : getPStatus().hashCode());
+        result = prime * result + ((getPStay() == null) ? 0 : getPStay().hashCode());
         return result;
     }
 
@@ -73,10 +73,10 @@ public class Department implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", department=").append(department);
         sb.append(", id=").append(id);
-        sb.append(", uuid=").append(uuid);
-        sb.append(", depSn=").append(depSn);
+        sb.append(", pId=").append(pId);
+        sb.append(", pStatus=").append(pStatus);
+        sb.append(", pStay=").append(pStay);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

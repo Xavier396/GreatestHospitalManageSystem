@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanghaijia.mapper.StaffMapper">
+
+    <resultMap id="BaseResultMap" type="com.yanghaijia.domain.Staff">
+            <id property="id" column="id" jdbcType="OTHER"/>
+            <result property="workerId" column="worker_id" jdbcType="VARCHAR"/>
+            <result property="workerName" column="worker_name" jdbcType="VARCHAR"/>
+            <result property="workerBirthday" column="worker_birthday" jdbcType="VARCHAR"/>
+            <result property="workerPhone" column="worker_phone" jdbcType="VARCHAR"/>
+            <result property="workerEmail" column="worker_email" jdbcType="VARCHAR"/>
+            <result property="workerDepartment" column="worker_department" jdbcType="VARCHAR"/>
+            <result property="workerOtherNote" column="worker_other_note" jdbcType="VARCHAR"/>
+            <result property="workerRole" column="worker_role" jdbcType="VARCHAR"/>
+            <result property="workerPassword" column="worker_password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,worker_id,worker_name,
+        worker_birthday,worker_phone,worker_email,
+        worker_department,worker_other_note,worker_role,
+        worker_password
+    </sql>
+</mapper>

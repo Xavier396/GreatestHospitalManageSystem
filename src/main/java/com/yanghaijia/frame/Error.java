@@ -1,4 +1,4 @@
-package com.yanghaijia.domain;
+package com.yanghaijia.frame;
 /**
  * @author yhjzs
  */ //错误类

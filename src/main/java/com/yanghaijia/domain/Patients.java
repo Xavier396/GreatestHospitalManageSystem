@@ -1,107 +1,135 @@
 package com.yanghaijia.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import lombok.Data;
+
 /**
- * @author yanghaijia
+ * 
+ * @TableName Patients
  */
-public class Patients {
+@TableName(value ="Patients")
+@Data
+public class Patients implements Serializable {
     /**
-     * <p>
-     *     pId:病人的病例号
-     *     pTel：病人的联系方式
-     *     pPrescriptId:病人的处方号
-     * </p>
-     * */
-    private Integer id;
-    private String p_id;
-    private String p_name;
-    private String p_birthday;
-    private String p_allergic;
-    private String p_tel;
-    private String p_email;
-    private String p_visit;
-    private String p_prescript_id;
-    private String p_department;
+     * 
+     */
+    @TableId
+    private Object id;
 
-    public Patients() {
+    /**
+     * 
+     */
+    private String pId;
+
+    /**
+     * 
+     */
+    private String pName;
+
+    /**
+     * 
+     */
+    private String pBirthday;
+
+    /**
+     * 
+     */
+    private String pAllergic;
+
+    /**
+     * 
+     */
+    private String pTel;
+
+    /**
+     * 
+     */
+    private String pEmail;
+
+    /**
+     * 
+     */
+    private String pVisit;
+
+    /**
+     * 
+     */
+    private String pPrescriptId;
+
+    /**
+     * 
+     */
+    private String pDepartment;
+
+    private String pPassword;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Patients other = (Patients) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getPId() == null ? other.getPId() == null : this.getPId().equals(other.getPId()))
+            && (this.getPName() == null ? other.getPName() == null : this.getPName().equals(other.getPName()))
+            && (this.getPBirthday() == null ? other.getPBirthday() == null : this.getPBirthday().equals(other.getPBirthday()))
+            && (this.getPAllergic() == null ? other.getPAllergic() == null : this.getPAllergic().equals(other.getPAllergic()))
+            && (this.getPTel() == null ? other.getPTel() == null : this.getPTel().equals(other.getPTel()))
+            && (this.getPEmail() == null ? other.getPEmail() == null : this.getPEmail().equals(other.getPEmail()))
+            && (this.getPVisit() == null ? other.getPVisit() == null : this.getPVisit().equals(other.getPVisit()))
+            && (this.getPPrescriptId() == null ? other.getPPrescriptId() == null : this.getPPrescriptId().equals(other.getPPrescriptId()))
+            && (this.getPDepartment() == null ? other.getPDepartment() == null : this.getPDepartment().equals(other.getPDepartment()))
+            && (this.getPPassword() == null ? other.getPPassword() == null :this.getPPassword().equals(other.getPPassword()));
     }
 
-    public Integer getId() {
-        return id;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getPId() == null) ? 0 : getPId().hashCode());
+        result = prime * result + ((getPName() == null) ? 0 : getPName().hashCode());
+        result = prime * result + ((getPBirthday() == null) ? 0 : getPBirthday().hashCode());
+        result = prime * result + ((getPAllergic() == null) ? 0 : getPAllergic().hashCode());
+        result = prime * result + ((getPTel() == null) ? 0 : getPTel().hashCode());
+        result = prime * result + ((getPEmail() == null) ? 0 : getPEmail().hashCode());
+        result = prime * result + ((getPVisit() == null) ? 0 : getPVisit().hashCode());
+        result = prime * result + ((getPPrescriptId() == null) ? 0 : getPPrescriptId().hashCode());
+        result = prime * result + ((getPDepartment() == null) ? 0 : getPDepartment().hashCode());
+        return result;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getP_id() {
-        return p_id;
-    }
-
-    public void setP_id(String p_id) {
-        this.p_id = p_id;
-    }
-
-    public String getP_name() {
-        return p_name;
-    }
-
-    public void setP_name(String p_name) {
-        this.p_name = p_name;
-    }
-
-    public String getP_birthday() {
-        return p_birthday;
-    }
-
-    public void setP_birthday(String p_birthday) {
-        this.p_birthday = p_birthday;
-    }
-
-    public String getP_allergic() {
-        return p_allergic;
-    }
-
-    public void setP_allergic(String p_allergic) {
-        this.p_allergic = p_allergic;
-    }
-
-    public String getP_tel() {
-        return p_tel;
-    }
-
-    public void setP_tel(String p_tel) {
-        this.p_tel = p_tel;
-    }
-
-    public String getP_email() {
-        return p_email;
-    }
-
-    public void setP_email(String p_email) {
-        this.p_email = p_email;
-    }
-
-    public String getP_visit() {
-        return p_visit;
-    }
-
-    public void setP_visit(String p_visit) {
-        this.p_visit = p_visit;
-    }
-
-    public String getP_prescript_id() {
-        return p_prescript_id;
-    }
-
-    public void setP_prescript_id(String p_prescript_id) {
-        this.p_prescript_id = p_prescript_id;
-    }
-
-    public String getP_department() {
-        return p_department;
-    }
-
-    public void setP_department(String p_department) {
-        this.p_department = p_department;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", pId=").append(pId);
+        sb.append(", pName=").append(pName);
+        sb.append(", pBirthday=").append(pBirthday);
+        sb.append(", pAllergic=").append(pAllergic);
+        sb.append(", pTel=").append(pTel);
+        sb.append(", pEmail=").append(pEmail);
+        sb.append(", pVisit=").append(pVisit);
+        sb.append(", pPrescriptId=").append(pPrescriptId);
+        sb.append(", pDepartment=").append(pDepartment);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
