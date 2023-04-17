@@ -1,17 +1,14 @@
 package com.yanghaijia.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
+import com.yanghaijia.dao.DepartmentService;
+import com.yanghaijia.dao.PatientsService;
+import com.yanghaijia.dao.StaffService;
 import com.yanghaijia.domain.Department;
-import com.yanghaijia.domain.Password;
 import com.yanghaijia.domain.Patients;
 import com.yanghaijia.domain.Staff;
-import com.yanghaijia.service.DepartmentService;
-import com.yanghaijia.service.PasswordService;
-import com.yanghaijia.service.PatientsService;
-import com.yanghaijia.service.StaffService;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +21,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static com.yanghaijia.controller.ConstantForController.*;
 
@@ -37,8 +34,6 @@ public class AdminController {
     @Autowired
     private DepartmentService departmentService;
     @Autowired
-    private PasswordService passwordService;
-    @Autowired
     private PatientsService patientsService;
 
 
@@ -46,8 +41,8 @@ public class AdminController {
     public String staffManager(Model m) {
         //表头
         String[] s = new String[]{ "唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
-        List<Staff> allStaff = staffService.fetchAll();
-        List<Department> allDepart = departmentService.fetchAll();
+        List<Staff> allStaff = staffService.lambdaQuery().list();
+        List<Department> allDepart = departmentService.lambdaQuery().list();
         m.addAttribute("head", s);
         m.addAttribute("allstaff", allStaff);
         m.addAttribute("alldepart",allDepart);
@@ -58,8 +53,8 @@ public class AdminController {
     public String userManager(Model m)
     {
         String [] s=new String[]{ "唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
-        List<Patients> allPatient=patientsService.fetchAll();
-        List<Department> allDepart = departmentService.fetchAll();
+        List<Patients> allPatient=patientsService.lambdaQuery().list();
+        List<Department> allDepart = departmentService.lambdaQuery().list();
         m.addAttribute("head", s);
         m.addAttribute("allstaff", allPatient);
         m.addAttribute("alldepart",allDepart);
@@ -88,7 +83,7 @@ public class AdminController {
     @RequestMapping("/addstaff")
     public String addStaff(Model m)
     {
-        List<Department> allDepart=departmentService.fetchAll();
+        List<Department> allDepart=departmentService.lambdaQuery().list();
         m.addAttribute("allDepart",allDepart);
         return "AddStaff";
     }
@@ -96,7 +91,7 @@ public class AdminController {
     @RequestMapping("/adduser")
     public String addUser(Model m)
     {
-        List<Department> departments=departmentService.fetchAll();
+        List<Department> departments=departmentService.lambdaQuery().list();
         m.addAttribute("alldepart",departments);
         return "AddUser";
     }
@@ -105,7 +100,9 @@ public class AdminController {
     public String filter(Model m, Integer limit ,String depart,String keyword)
     {
         String[] s = new String[]{"序号", "唯一编号", "姓名", "所属科室", "联系方式", "邮箱", "其他说明", "操作"};
-        List<Staff> allStaff=staffService.fetchSome(depart,keyword);
+        //FIXME:重写
+        List<Staff> allStaff=new ArrayList<>();
+//                staffService.fetchSome(depart,keyword);
         m.addAttribute("head", s);
         m.addAttribute("allstaff", allStaff);
         return "Admin";
@@ -113,13 +110,14 @@ public class AdminController {
 
     @RequestMapping("/removedoctor/{id}")
     public void  removeDoctor(@PathVariable String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        staffService.deleteById(id);
+        staffService.removeById(id);
         response.sendRedirect(request.getContextPath()+"/admin");
     }
 
     @RequestMapping("/removeuser/{id}")
     public void removeUser(@PathVariable String id,HttpServletRequest request,HttpServletResponse response) throws IOException {
-        patientsService.deleteById(id);
+        patientsService.removeById(id);
+//                .lambdaQuery().eq(Patients::getPId,id);
         response.sendRedirect(request.getContextPath()+"/admin");
     }
 
@@ -139,12 +137,12 @@ public class AdminController {
         staff.setWorkerEmail(worker_email);
         staff.setWorkerDepartment(worker_department);
         staff.setWorkerOtherNote(worker_other_note);
-        staffService.insertOne(staff);
-        Password password=new Password();
-        password.setUserId(staff.getWorkerId());
-        password.setUserPhone(staff.getWorkerPhone());
-        password.setPasswordHash(new Md5Hash("123456",null,2).toString());
-        passwordService.insertOne(password);
+//        staffService.insertOne(staff);
+//        Password password=new Password();
+//        password.setUserId(staff.getWorkerId());
+//        password.setUserPhone(staff.getWorkerPhone());
+//        password.setPasswordHash(new Md5Hash("123456",null,2).toString());
+//        passwordService.insertOne(password);
         response.sendRedirect(request.getContextPath()+"/admin");
         return null;
 
@@ -159,20 +157,20 @@ public class AdminController {
             return "Error";
         }
         Patients p=new Patients();
-        p.setP_name(name);
-        p.setP_birthday(birthday);
-        p.setP_allergic(allergic);
-        p.setP_tel(phone);
-        p.setP_email(email);
-        p.setP_id("C"+RandomStringUtils.random(6,true,true));
-        p.setP_visit(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        p.setP_department(depart);
-        patientsService.insertOne(p);
-        Password password=new Password();
-        password.setUserPhone(phone);
-        password.setPasswordHash(new Md5Hash("123456",null,2).toString());
-        password.setUserId(p.getP_id());
-        passwordService.insertOne(password);
+        p.setPName(name);
+        p.setPBirthday(birthday);
+        p.setPAllergic(allergic);
+        p.setPTel(phone);
+        p.setPEmail(email);
+        p.setPId("C"+RandomStringUtils.random(6,true,true));
+        p.setPVisit(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        p.setPDepartment(depart);
+        patientsService.save(p);
+//        Password password=new Password();
+//        password.setUserPhone(phone);
+//        password.setPasswordHash(new Md5Hash("123456",null,2).toString());
+//        password.setUserId(p.getP_id());
+//        passwordService.insertOne(password);
         response.sendRedirect(request.getContextPath()+"/admin");
         return null;
     }

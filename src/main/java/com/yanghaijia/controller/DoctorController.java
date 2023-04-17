@@ -1,17 +1,14 @@
 package com.yanghaijia.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.yanghaijia.domain.Patients;
-import com.yanghaijia.domain.Prescriptions;
-import com.yanghaijia.service.PatientsService;
-import com.yanghaijia.service.PrescriptionsService;
+import com.yanghaijia.dao.PatientsService;
+import com.yanghaijia.dao.PrescriptionsService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

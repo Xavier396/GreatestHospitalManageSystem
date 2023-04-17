@@ -1,49 +1,84 @@
 package com.yanghaijia.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import lombok.Data;
+
 /**
- * @author yanghaijia
+ * 
+ * @TableName Prescriptions
  */
-public class Prescriptions {
+@TableName(value ="Prescriptions")
+@Data
+public class Prescriptions implements Serializable {
     /**
-     * id:数据库自增
-     * prescriptionId:处方id，他应该是唯一的uuid
-     * prescriptionContent：处方的具体内容
-     * prescriptionDateTime：处方开具的时间日期
-     * */
-private  Integer id;
-private String prescription_id;
-private  String prescription_content;
-private String prescription_datetime;
+     * 
+     */
+    @TableId(type = IdType.AUTO)
+    private Object id;
 
-    public Integer getId() {
-        return id;
+    /**
+     * 
+     */
+    private String prescriptionId;
+
+    /**
+     * 
+     */
+    private String prescriptionContent;
+
+    /**
+     * 
+     */
+    private String prescriptionDatetime;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Prescriptions other = (Prescriptions) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getPrescriptionId() == null ? other.getPrescriptionId() == null : this.getPrescriptionId().equals(other.getPrescriptionId()))
+            && (this.getPrescriptionContent() == null ? other.getPrescriptionContent() == null : this.getPrescriptionContent().equals(other.getPrescriptionContent()))
+            && (this.getPrescriptionDatetime() == null ? other.getPrescriptionDatetime() == null : this.getPrescriptionDatetime().equals(other.getPrescriptionDatetime()));
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getPrescriptionId() == null) ? 0 : getPrescriptionId().hashCode());
+        result = prime * result + ((getPrescriptionContent() == null) ? 0 : getPrescriptionContent().hashCode());
+        result = prime * result + ((getPrescriptionDatetime() == null) ? 0 : getPrescriptionDatetime().hashCode());
+        return result;
     }
 
-    public String getPrescriptionId() {
-        return prescription_id;
-    }
-
-    public void setPrescriptionId(String prescriptionId) {
-        this.prescription_id = prescriptionId;
-    }
-
-    public String getPrescriptionContent() {
-        return prescription_content;
-    }
-
-    public void setPrescriptionContent(String prescriptionContent) {
-        this.prescription_content = prescriptionContent;
-    }
-
-    public String getPrescriptionDateTime() {
-        return prescription_datetime;
-    }
-
-    public void setPrescriptionDateTime(String prescriptionDateTime) {
-        this.prescription_datetime = prescriptionDateTime;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", prescriptionId=").append(prescriptionId);
+        sb.append(", prescriptionContent=").append(prescriptionContent);
+        sb.append(", prescriptionDatetime=").append(prescriptionDatetime);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

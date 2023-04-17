@@ -1,79 +1,124 @@
 package com.yanghaijia.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import lombok.Data;
+
 /**
- * @author yanghaijia
+ * 
+ * @TableName Medicine
  */
-public class Medicine {
-    private Integer id;
-    private String medicine_name;
-    private Integer medicine_quantity;
-    private String medicine_supplier;
-    private Boolean medicine_legitimacy;
-    private Boolean is_medicine_for_pregnant;
-    private String medicine_instructions;
-    private Double medicine_price;
+@TableName(value ="Medicine")
+@Data
+public class Medicine implements Serializable {
+    /**
+     * 
+     */
+    @TableId(type = IdType.AUTO)
+    private Object id;
 
-    public Integer getId() {
-        return id;
+    /**
+     * 
+     */
+    private String medicineName;
+
+    /**
+     * 
+     */
+    private Object medicineQuantity;
+
+    /**
+     * 
+     */
+    private String medicineSupplier;
+
+    /**
+     * 
+     */
+    private Object medicineLegitimacy;
+
+    /**
+     * 
+     */
+    private Object isMedicineForPregnant;
+
+    /**
+     * 
+     */
+    private String medicineInstructions;
+
+    /**
+     * 
+     */
+    private Float medicinePrice;
+
+    /**
+     * 
+     */
+    private String uuid;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Medicine other = (Medicine) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getMedicineName() == null ? other.getMedicineName() == null : this.getMedicineName().equals(other.getMedicineName()))
+            && (this.getMedicineQuantity() == null ? other.getMedicineQuantity() == null : this.getMedicineQuantity().equals(other.getMedicineQuantity()))
+            && (this.getMedicineSupplier() == null ? other.getMedicineSupplier() == null : this.getMedicineSupplier().equals(other.getMedicineSupplier()))
+            && (this.getMedicineLegitimacy() == null ? other.getMedicineLegitimacy() == null : this.getMedicineLegitimacy().equals(other.getMedicineLegitimacy()))
+            && (this.getIsMedicineForPregnant() == null ? other.getIsMedicineForPregnant() == null : this.getIsMedicineForPregnant().equals(other.getIsMedicineForPregnant()))
+            && (this.getMedicineInstructions() == null ? other.getMedicineInstructions() == null : this.getMedicineInstructions().equals(other.getMedicineInstructions()))
+            && (this.getMedicinePrice() == null ? other.getMedicinePrice() == null : this.getMedicinePrice().equals(other.getMedicinePrice()))
+            && (this.getUuid() == null ? other.getUuid() == null : this.getUuid().equals(other.getUuid()));
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getMedicineName() == null) ? 0 : getMedicineName().hashCode());
+        result = prime * result + ((getMedicineQuantity() == null) ? 0 : getMedicineQuantity().hashCode());
+        result = prime * result + ((getMedicineSupplier() == null) ? 0 : getMedicineSupplier().hashCode());
+        result = prime * result + ((getMedicineLegitimacy() == null) ? 0 : getMedicineLegitimacy().hashCode());
+        result = prime * result + ((getIsMedicineForPregnant() == null) ? 0 : getIsMedicineForPregnant().hashCode());
+        result = prime * result + ((getMedicineInstructions() == null) ? 0 : getMedicineInstructions().hashCode());
+        result = prime * result + ((getMedicinePrice() == null) ? 0 : getMedicinePrice().hashCode());
+        result = prime * result + ((getUuid() == null) ? 0 : getUuid().hashCode());
+        return result;
     }
 
-    public String getMedicineName() {
-        return medicine_name;
-    }
-
-    public void setMedicineName(String medicineName) {
-        this.medicine_name = medicineName;
-    }
-
-    public Integer getMedicineQuantity() {
-        return medicine_quantity;
-    }
-
-    public void setMedicineQuantity(Integer medicineQuantity) {
-        this.medicine_quantity = medicineQuantity;
-    }
-
-    public String getMedicineSupplier() {
-        return medicine_supplier;
-    }
-
-    public void setMedicineSupplier(String medicineSupplier) {
-        this.medicine_supplier = medicineSupplier;
-    }
-
-    public Boolean getMedicineLegitimacy() {
-        return medicine_legitimacy;
-    }
-
-    public void setMedicineLegitimacy(Boolean medicineLegitimacy) {
-        this.medicine_legitimacy = medicineLegitimacy;
-    }
-
-    public Boolean getMedicineForPregnant() {
-        return is_medicine_for_pregnant;
-    }
-
-    public void setMedicineForPregnant(Boolean medicineForPregnant) {
-        is_medicine_for_pregnant = medicineForPregnant;
-    }
-
-    public String getMedicineInstructions() {
-        return medicine_instructions;
-    }
-
-    public void setMedicineInstructions(String medicineInstructions) {
-        this.medicine_instructions = medicineInstructions;
-    }
-
-    public Double getMedicinePrice() {
-        return medicine_price;
-    }
-
-    public void setMedicinePrice(Double medicinePrice) {
-        this.medicine_price = medicinePrice;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", medicineName=").append(medicineName);
+        sb.append(", medicineQuantity=").append(medicineQuantity);
+        sb.append(", medicineSupplier=").append(medicineSupplier);
+        sb.append(", medicineLegitimacy=").append(medicineLegitimacy);
+        sb.append(", isMedicineForPregnant=").append(isMedicineForPregnant);
+        sb.append(", medicineInstructions=").append(medicineInstructions);
+        sb.append(", medicinePrice=").append(medicinePrice);
+        sb.append(", uuid=").append(uuid);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
